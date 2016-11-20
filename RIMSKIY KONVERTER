@@ -1,0 +1,34 @@
+def III (r, i, n, A, d):
+    if r [i-1] == A:
+        if r[i-2] == A:
+            n += 3*d; i-=3
+        else:
+            n+=2*d; i-=2
+    else:
+        n+=d; i-=1
+    return(i, n)
+def XCM (r,i,n,A,B,d):
+    if r [i-1] == A:
+        n+=0.9*d; i -=2
+    else: (i,n) = III(r,i,n,A,d)
+    return(i,n)
+def VLD (r,i,n,A,d):
+    if r [i-1] == A:
+        n+=4*d; i-=2
+    else:
+        n+=5*d; i-=1
+    return(i,n)
+r = input('введите римское число         ')
+i=len(r)-1
+n = 0
+while i>=0:
+    if r[i] == 'I':(i,n) = III(r,i,n,'I',1)
+    elif r[i] == 'V':(i,n) = VLD(r,i,n,'I',1)
+    elif r[i] == 'X':(i,n) = XCM(r,i,n,'I','X',10)
+    elif r[i] == 'L':(i,n) = VLD(r,i,n,'X',10)
+    elif r[i] == 'C':(i,n) = XCM(r,i,n,'X','C',100)
+    elif r[i] == 'D':(i,n) = VLD(r,i,n,'C',100)
+    elif r[i] == 'M':(i,n) = XCM(r,i,n,'C','M',1000)
+    else:
+        print('введено не римское число'); break
+print(n)
